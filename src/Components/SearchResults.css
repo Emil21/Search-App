@@ -1,0 +1,25 @@
+.resultOuterDiv {
+    display: flex;
+    justify-content: center;
+}
+
+.links{
+    height: 25px;
+    padding: 10px;
+    font-family: SFUIText-Regular;
+    font-size: 14px;
+    color: #091E42;
+    line-height: 20px;
+    margin-bottom: 10px;
+}
+.icon {
+    padding-right: 10px
+}
+
+.results{
+    width: 700px;
+    padding-top:  25px;
+}
+.dummy{
+    width: 200px;
+}

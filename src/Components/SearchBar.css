@@ -1,0 +1,45 @@
+.inputBox{
+    background: #FFFFFF;
+    border: 2px solid #E3E6EA;
+    border-radius: 8px;
+    width: 599px;
+    height: 50px;
+    background: url(./../search.svg) no-repeat scroll 7px 7px;
+    padding-left:30px;
+    
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    font-family: SFUIText-Regular;
+    font-size: 18px;
+    color: #A5ADBA;
+    opacity: 1; /* Firefox */
+  }
+
+.holder {
+    position: relative;
+}
+.dropdown {
+    background: #FFFFFF;
+    position: absolute;
+    border: 2px solid #E3E6EA;
+    width: 625px;
+    border-radius: 8px;
+}
+
+.names{
+    height: 25px;
+    width: 617  px;
+    border-bottom: 1px solid #E3E6EA;;
+    padding: 5px;
+}
+input:focus + .dropdown {
+    display: block;
+}

@@ -1,0 +1,23 @@
+.outerdiv{
+    width: 48px;
+    display: flex;
+    padding-right: 50px;
+}
+
+.yellow {
+    width: 16px;
+    height: 8px;
+    background: #DEDE3B; 
+}
+
+.green {
+    width: 16px;
+    height: 8px;
+    background: #74AC1B;
+}
+
+.blue {
+    width: 16px;
+    height: 8px;
+    background: #009DE0; 
+}
