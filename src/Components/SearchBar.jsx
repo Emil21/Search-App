@@ -6,12 +6,13 @@ import './SearchBar.css';
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { query: "", suggestions: [] };
+    this.state = { query: "", suggestions: [], showDropdown : false };
     this.autocompleteSearchThrottled = throttle(1000, this.autocompleteSearch);
   }
 
   changeQuery = event => {
-    this.setState({ query: event.target.value }, () => {
+    const showDropdown = event.target.value !== '' ? true : false;
+    this.setState({ query: event.target.value, showDropdown }, () => {
       this.autocompleteSearchThrottled(this.state.query);
     });
   };
@@ -23,7 +24,7 @@ class SearchBar extends React.Component {
   countrySelected = (evt) => {
     const selected = evt.target.dataset.id;
     const { updateSearch } = this.props;
-    this.setState({ suggestions: [], query: selected });
+    this.setState({ suggestions: [], query: selected, showDropdown: false });
     const searchResults = [];
     let urls = [
       "http://localhost:3001/getdata?search=" + selected ,
@@ -43,7 +44,9 @@ class SearchBar extends React.Component {
   }
 
   showDropdown = () => {
-    const { suggestions } = this.state;
+    const { suggestions, showDropdown } = this.state;
+    if(suggestions.length <1 && showDropdown)
+    suggestions.push("Sorry, no results found. Please try another country name");
     return(
       <div className="dropdown">
       {suggestions.map( (item, index) => {
@@ -76,7 +79,7 @@ class SearchBar extends React.Component {
   };
 
   render() {
-    const {query, suggestions} = this.state;
+    const {query, suggestions, showDropdown} = this.state;
     return (
       <div className="holder">
         <input
@@ -87,7 +90,7 @@ class SearchBar extends React.Component {
           value={query}
           onChange={this.changeQuery}
         />
-        {suggestions.length > 0 ? this.showDropdown() : null }
+        {showDropdown ? this.showDropdown() : null }
       </div>
     );
   }
