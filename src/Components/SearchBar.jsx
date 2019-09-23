@@ -23,23 +23,26 @@ class SearchBar extends React.Component {
 
   countrySelected = (evt) => {
     const selected = evt.target.dataset.id;
-    const { updateSearch } = this.props;
-    this.setState({ suggestions: [], query: selected, showDropdown: false });
-    const searchResults = [];
-    let urls = [
-      "http://localhost:3001/getdata?search=" + selected ,
-      "http://localhost:3001/getDuckResults?search=" + selected ,
-    ];
+    if(! selected.includes("Sorry, no results found")) {
+      const { updateSearch } = this.props;
+      this.setState({ suggestions: [], query: selected, showDropdown: false });
+      const searchResults = [];
+      let urls = [
+        "http://localhost:3001/getdata?search=" + selected ,
+        "http://localhost:3001/getDuckResults?search=" + selected ,
+      ];
+      
+      let requests = urls.map(url => fetch(url));
+      
+      Promise.all(requests)
+        // map array of responses into array of response.json() to read their content
+        .then(responses => Promise.all(responses.map(r => r.json())))
+        // all JSON answers are parsed: "searchResults" is the array of them
+        .then(data => { data.forEach(d => searchResults.push(...d.result)   )
+  
+        updateSearch(searchResults) } );
+    }
     
-    let requests = urls.map(url => fetch(url));
-    
-    Promise.all(requests)
-      // map array of responses into array of response.json() to read their content
-      .then(responses => Promise.all(responses.map(r => r.json())))
-      // all JSON answers are parsed: "searchResults" is the array of them
-      .then(data => { data.forEach(d => searchResults.push(...d.result)   )
- 
-      updateSearch(searchResults) } );
 
   }
 
