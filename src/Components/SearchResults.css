@@ -1,6 +1,7 @@
 .resultOuterDiv {
     display: flex;
     justify-content: center;
+    height: 100%;
 }
 
 .links{
@@ -22,4 +23,8 @@
 }
 .dummy{
     width: 200px;
+}
+
+.defaultScreen {
+    padding-top: 200px;
 }
