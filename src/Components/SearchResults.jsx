@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import './SearchResults.css';
 import  google from './../assets/google.png';
 import  duck from './../assets/duck.svg';
+import  globe from './../assets/giphy.gif';
+
 
 class SearchResults extends Component {
 
@@ -30,6 +32,14 @@ class SearchResults extends Component {
         );
     }
 
+    renderDefaultPage = () => {
+        return (
+            <div className="defaultScreen">
+                <img src={globe} alt="globe" className="icon" height="100px" width="100px"  /> 
+            </div>
+        );
+    }
+
     componentDidUpdate(prevProps) {
         if (this.props.results !== prevProps.results) {
             this.setState({ data: this.props.results })         
@@ -40,7 +50,7 @@ class SearchResults extends Component {
         const { data } = this.state;
         return(
             <div className="resultOuterDiv">
-                { data.length > 0 ? this.renderResults() : null }
+                { data.length > 0 ? this.renderResults() : this.renderDefaultPage() }
             </div>
         );
     }
